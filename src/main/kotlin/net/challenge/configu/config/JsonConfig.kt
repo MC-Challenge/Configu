@@ -1,6 +1,7 @@
 package net.challenge.configu.config
 
 import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import net.challenge.configu.container.ISaveContainer
 import java.io.File
 import java.io.FileReader
@@ -15,15 +16,25 @@ class JsonConfig(
     /**
      * Under this path these config files are stored.
      */
-    private val path: File
+    private val path: File,
+
+    /**
+     * Configures Gson to output Json that fits in a page for pretty printing.
+     */
+    prettyPrinting: Boolean
 
 ) : IConfig {
 
-    private val gson: Gson = Gson()
+    private val gson: Gson =
+        if (prettyPrinting)
+            GsonBuilder().setPrettyPrinting().create()
+        else
+            Gson()
 
     override var containers: List<ISaveContainer> = listOf()
 
     init {
+
         // Create the path if the path doesn't exist
         if (!path.exists())
             path.mkdirs()
@@ -35,7 +46,7 @@ class JsonConfig(
 
             val fileName = it.getFileName().replace(" ", "_")
             val file = File(path, "${fileName}.json")
-            
+
             val myWriter = FileWriter(file)
             myWriter.write(json)
             myWriter.close()

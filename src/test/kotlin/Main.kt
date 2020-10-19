@@ -15,7 +15,7 @@ Int
     modules.forEach { it.load() }
 
     // Using a json config to save the values
-    val config = JsonConfig(File("config"))
+    val config = JsonConfig(File("config"), true)
 
     // Register all modules in the config
     modules.forEach { config.register(it) }
