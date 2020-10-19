@@ -22,7 +22,8 @@ open abstract class ValueContainer(
     /**
      * List of all values in this container.
      */
-    private var values: List<Value<*>> = listOf()
+    var values: List<Value<*>> = listOf()
+        protected set
 
     /**
      * Add all variables values of this class to the [values].
