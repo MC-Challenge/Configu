@@ -3,7 +3,7 @@ package net.challenge.configu.value
 /**
  * TODO Doc
  */
-open class Value<T>(var value: T) {
+open class Value<T>(open var value: T) {
 
     /**
      * Name of the value

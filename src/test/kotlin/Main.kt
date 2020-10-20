@@ -10,7 +10,7 @@ fun main() {
 
     modules += Module("FPS")
     modules += Module("CPS")
-Int
+
     // Loading the modules
     modules.forEach { it.load() }
 
