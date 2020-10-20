@@ -63,7 +63,10 @@ object ValueScanner : IValueScanner{
         if (value !is Value<*>)
             throw RuntimeException("The field is not a Value")
 
-        value.setTagInfo(getTag(field)!!)
+        val tag = getTag(field)!!
+
+        value.name = tag.name
+        value.description = tag.description
 
         return value
     }
