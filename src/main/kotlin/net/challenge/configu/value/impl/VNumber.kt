@@ -46,6 +46,10 @@ class VNumber(value: Double) : Value<Double>(value) {
 
     constructor(value: Float) : this(value.toDouble())
 
+    fun hasDistance(): Boolean {
+        return minimum != null && maximum != null
+    }
+
     fun setDistance(minimum: Double, maximum: Double): VNumber {
         this.minimum = minimum
         this.maximum = maximum
