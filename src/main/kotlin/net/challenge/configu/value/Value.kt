@@ -5,7 +5,14 @@ package net.challenge.configu.value
  * This value has a name and a description which
  * is set with the help of a [VTag].
  */
-open class Value<T>(open var value: T) {
+open class Value<T> {
+
+    open var value: T
+
+    /**
+     * The default value.
+     */
+    val defaultValue: T
 
     /**
      * Name of the value
@@ -17,6 +24,11 @@ open class Value<T>(open var value: T) {
      */
     var description: String = "No-Description"
 
+    constructor(value: T) {
+        this.value = value
+        this.defaultValue = value
+    }
+
     /**
      * Set the value by a object.
      *
@@ -25,5 +37,12 @@ open class Value<T>(open var value: T) {
     @Suppress("UNCHECKED_CAST")
     fun setObject(obj: Any) {
         this.value = (obj as T)
+    }
+
+    /**
+     * Reset the value to default.
+     */
+    fun reset() {
+        value = defaultValue
     }
 }

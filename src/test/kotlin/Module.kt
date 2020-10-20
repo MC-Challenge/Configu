@@ -15,10 +15,10 @@ class Module(private val name: String) : ValueContainer(ValueScanner) {
     val color = VColor(Color(55, 200, 0, 20))
 
     @VTag(name = "Size")
-    val size = VNumber(-4).setDistance(2, 100)
+    val size = VNumber(3, 2, 100)
 
     @VTag(name = "Scale")
-    val scale = VNumber(10.3432432434).setDistance(10.0, 31.0)
+    val scale = VNumber(4, 1, 103)
 
     override fun getFileName(): String {
         return name
