@@ -1,7 +1,9 @@
 package net.challenge.configu.value
 
 /**
- * TODO Doc
+ * A value contains a value.
+ * This value has a name and a description which
+ * is set with the help of a [VTag].
  */
 open class Value<T>(open var value: T) {
 
