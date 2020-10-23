@@ -6,7 +6,7 @@ import java.awt.Color
 /**
  * Default implementation of a [Value] with a [Color].
  */
-class VColor(value: Color) : Value<Color>(value) {
+class VColor(value: Color) : Value<Color, VColor>(value) {
 
     /**
      * Get the color as hex-string.

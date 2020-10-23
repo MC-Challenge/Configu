@@ -1,5 +1,6 @@
 package net.challenge.configu.value.impl
 
+import net.challenge.configu.events.ValueChangeEvent
 import net.challenge.configu.value.Value
 import kotlin.math.pow
 import kotlin.math.roundToInt
@@ -8,7 +9,7 @@ import kotlin.math.roundToInt
  * Default implementation of a [Value] with a Number.
  * All values are stored as [Double].
  */
-class VNumber(value: Double) : Value<Double>(value) {
+class VNumber(value: Double) : Value<Double, VNumber>(value) {
 
     /**
      * The value lower limit.
@@ -30,15 +31,14 @@ class VNumber(value: Double) : Value<Double>(value) {
     override var value: Double = 0.0
         set(value) {
             // round the number to the specified decimalPlaces
-            val roundValue = value.toInt() + (10.0.pow(decimalPlaces) * (value - value.toInt())).roundToInt() / 10.0.pow(decimalPlaces)
+            var roundValue = value.toInt() + (10.0.pow(decimalPlaces) * (value - value.toInt())).roundToInt() / 10.0.pow(decimalPlaces)
 
             // check minimum limit
             minimum?.let {
                 if (value >= it)
                     return@let
 
-                field = it
-                return
+                roundValue = it
             }
 
             // check maximum limit
@@ -46,11 +46,15 @@ class VNumber(value: Double) : Value<Double>(value) {
                 if (value <= it)
                     return@let
 
-                field = it
-                return
+                roundValue = it
             }
 
-            field = roundValue
+            val event = ValueChangeEvent(field, roundValue)
+            changeListener?.onChange(event)
+
+            if (event.cancel) return
+
+            field = event.after
         }
 
     /**

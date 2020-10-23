@@ -11,5 +11,5 @@ interface IValueScanner {
     /**
      * Find all values in the object.
      */
-    fun findValues(obj: Any): List<Value<*>>
+    fun findValues(obj: Any): List<Value<*, *>>
 }

@@ -1,4 +1,6 @@
 import net.challenge.configu.container.ValueContainer
+import net.challenge.configu.events.ValueChangeEvent
+import net.challenge.configu.events.ValueChangeListener
 import net.challenge.configu.scanner.ValueScanner
 import net.challenge.configu.value.VTag
 import net.challenge.configu.value.impl.VBool
@@ -16,6 +18,11 @@ class Module(private val name: String) : ValueContainer(ValueScanner) {
 
     @VTag(name = "Size")
     val size = VNumber(3, 2, 100)
+        .setChangeListener(object : ValueChangeListener<Double> {
+            override fun onChange(event: ValueChangeEvent<Double>) {
+                println("Change to " + event.after)
+            }
+        })
 
     @VTag(name = "Scale")
     val scale = VNumber(4, 1, 103)

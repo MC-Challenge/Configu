@@ -18,8 +18,8 @@ object ValueScanner : IValueScanner{
      *
      * @param obj Object to be searched for values
      */
-    override fun findValues(obj: Any): List<Value<*>> {
-        val values = ArrayList<Value<*>>()
+    override fun findValues(obj: Any): List<Value<*, *>> {
+        val values = ArrayList<Value<*, *>>()
         var currentClass: Class<*>? = obj.javaClass
 
         do {
@@ -41,7 +41,7 @@ object ValueScanner : IValueScanner{
      *
      * @return List of all founded values.
      */
-    private fun findValues(obj: Any, clazz: Class<*>): List<Value<*>> {
+    private fun findValues(obj: Any, clazz: Class<*>): List<Value<*, *>> {
         return clazz.declaredFields
             .toList()
             .filter { hasTag(it) }
@@ -57,10 +57,10 @@ object ValueScanner : IValueScanner{
      *
      * @return The Value from the field
      */
-    private fun fieldToValue(obj: Any, field: Field): Value<*> {
+    private fun fieldToValue(obj: Any, field: Field): Value<*, *> {
         val value = getField(obj, field) ?: throw RuntimeException("Value is Null")
 
-        if (value !is Value<*>)
+        if (value !is Value<*, *>)
             throw RuntimeException("The field is not a Value")
 
         val tag = getTag(field)!!
