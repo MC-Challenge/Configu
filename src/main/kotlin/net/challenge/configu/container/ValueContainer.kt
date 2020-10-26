@@ -35,7 +35,7 @@ open abstract class ValueContainer(
     /**
      * After creating the container it must be loaded.
      */
-    fun load() {
+    override fun load() {
         autoValueLoad()
     }
 
