@@ -1,11 +1,10 @@
-package net.challenge.configu.container
+package net.challenge.configu.container.value
 
-import net.challenge.configu.config.IConfig
 import net.challenge.configu.scanner.IValueScanner
 import net.challenge.configu.value.Value
 
 /**
- * With this container you can store a list of [Value]s in the [IConfig].
+ * Basic implementation of [IValueContainer].
  * The values are automatically read from the class using a [IValueScanner] and
  * entered into the list. After creating the container only the [load]
  * function must be executed.
@@ -17,13 +16,12 @@ open abstract class ValueContainer(
      */
     private val scanner: IValueScanner
 
-) : ISaveContainer {
+) : IValueContainer {
 
     /**
      * List of all values in this container.
      */
-    var values: List<Value<*, *>> = listOf()
-        protected set
+    override val values: MutableCollection<Value<*, *>> = mutableListOf()
 
     /**
      * Add all variables values of this class to the [values].

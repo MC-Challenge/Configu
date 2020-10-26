@@ -1,4 +1,4 @@
-import net.challenge.configu.container.ValueContainer
+import net.challenge.configu.container.value.ValueContainer
 import net.challenge.configu.events.ValueChangeEvent
 import net.challenge.configu.events.ValueChangeListener
 import net.challenge.configu.scanner.ValueScanner

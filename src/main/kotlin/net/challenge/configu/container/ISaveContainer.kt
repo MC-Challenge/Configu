@@ -30,9 +30,4 @@ interface ISaveContainer {
      * @return Name of the file.
      */
     fun getFileName(): String
-
-    /**
-     * After creating the container it must be loaded.
-     */
-    fun load()
 }
